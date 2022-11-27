@@ -44,7 +44,6 @@ rows = c.fetchall()
 last_id_facture = 0
 for row in rows:
 	last_id_facture = row[0]
-	print(last_id_facture)
 
 
 tab_id = [[1,last_id_facture-3],[1,last_id_facture-2],[1,last_id_facture-1],[1,last_id_facture]]
