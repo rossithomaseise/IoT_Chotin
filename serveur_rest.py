@@ -3,6 +3,9 @@
 # curl -X POST http://localhost:8888/Facture/\?Type\=Assurance\&Date_Facture\=2023-01-01\&Montant\=20\&Consommation\=0.00	
 # curl -X GET http://localhost:8888/Facture/Type
 # curl -X GET http://localhost:8888/Logement/Numero_Telephone/IP
+# curl -X GET http://localhost:8888/Facture/_Type_Eau
+# curl -X GET http://localhost:8888/Facture/+Type/+Consommation
+# curl -X GET http://localhost:8888/Facture/&Montant/_Type_Eau
 
 import http.server, urllib.parse, sqlite3
 from meteo import *
@@ -83,6 +86,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 			</html>"""
 			f = open("facture.html","w")
 			f.write(html)
+			f.close()
 		else:
 			rep = self.mysql.select(res.path)
 			if len(rep) > 0:
@@ -112,16 +116,32 @@ class MySQL():
 
 	def select(self,path):
 		elem = path.split('/')
-		print("elem",elem)
 		selection = ""
+		where = ""
 		if len(elem) == 2:
 			req = "select * from %s" %(elem[1])
 		else:
-			for i in range(2,len(elem)):
+			"""for i in range(2,len(elem)):
 				selection += elem[i] + ","
 			selection = selection[:len(selection)-1]
 			print(selection)
-			req = "select " + selection + " from %s" %(elem[1])
+			req = "select " + selection + " from %s" %(elem[1])"""
+			for i in range(1,len(elem)):
+				if(elem[i][0] == "_"):
+					#where += (elem[i].split("_"))
+					where += str((elem[i].split("_"))[1]) + " = " + "\"" + \
+					str(elem[i].split("_")[2]) + "\""
+					where += " AND "
+			where = where[0:len(where)-4]
+			for i in range(1,len(elem)):
+				if(elem[i][0] == "+"):
+					selection += elem[i][1:] + ","
+			selection = selection[:len(selection)-1]
+			if(not(selection)):
+				selection = "*"
+			#req = "select " + selection + " from %s WHERE " + where %(elem[1])
+			req = "select " + selection + " from Facture WHERE " + where
+			print("req",req)
 		return self.c.execute(req).fetchall()
 	
 	def insert(self,path,query):
