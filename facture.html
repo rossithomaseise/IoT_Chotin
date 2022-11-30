@@ -1,23 +1,23 @@
 <html> <head> <!--Load the AJAX API--> <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script> <script type='text/javascript'>
 
-		      google.charts.load('current', {'packages':['corechart']});
-		      google.charts.setOnLoadCallback(drawChart);
-		      function drawChart() {
-		        var data = new google.visualization.DataTable();
-		        data.addColumn('string', 'Topping');
-		        data.addColumn('number', 'Slices');
-		        data.addRows([['Internet', 25.7],['Electricite', 100.2],['Gaz', 20.0],['Eau', 15.0],['Internet', 64.0],['Electricite', 49.0],['Gaz', 95.0],['Eau', 42.0]]);
-		        var options = {'title':'Factures',
-		                       'width':400,
-		                       'height':300};
-		        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-		        chart.draw(data, options);
-		      }
-		    </script>
-		  </head>
+			      google.charts.load('current', {'packages':['corechart']});
+			      google.charts.setOnLoadCallback(drawChart);
+			      function drawChart() {
+			        var data = new google.visualization.DataTable();
+			        data.addColumn('string', 'Topping');
+			        data.addColumn('number', 'Slices');
+			        data.addRows([['Internet', 92.7],['Electricite', 149.2],['Gaz', 51.0],['Eau', 49.0],['Assurance', 20.0]]);
+			        var options = {'title':'Factures',
+			                       'width':400,
+			                       'height':300};
+			        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			        chart.draw(data, options);
+			      }
+			    </script>
+			  </head>
 
-		  <body>
-		    <!--Div that will hold the pie chart-->
-		    <div id='chart_div'></div>
-		  </body>
-		</html>
+			  <body>
+			    <!--Div that will hold the pie chart-->
+			    <div id='chart_div'></div>
+			  </body>
+			</html>
