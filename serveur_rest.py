@@ -3,6 +3,9 @@
 
 import http.server, urllib.parse, sqlite3
 
+import numpy as np
+from meteo import *
+
 class MyHandler(http.server.BaseHTTPRequestHandler):
 	def __init__(self, *args, **kwargs):
 		self.mysql = MySQL('logement.db')
@@ -18,7 +21,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 		print("post")
 		self.send_response(200)
 		self.send_header("Content-type", "text/html")
-		self.end_headers()
+		self.end_headers()		
 		self.wfile.write(bytes(str("allo post")+'\n', 'UTF-8'))
 		
 	def do_GET(self):
@@ -26,18 +29,59 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 		res = urllib.parse.urlparse(self.path)
 		print("res",res)
 		print("res path",res.path)
-		rep = self.mysql.select(res.path)
-		if len(rep) > 0:
+		if(res.path == "/Meteo"):
+			meteo = meteoH()
 			self.send_response(200)
 			self.send_header("Content-type", "text/html")
 			self.end_headers()
-			self.wfile.write(bytes(str(rep)+'\n', 'UTF-8'))
-		else:
-			self.send_response(404)
-			self.send_header("Content-type", "text/html")
-			self.end_headers()
-		
+			self.wfile.write(bytes(str(meteo)+'\n', 'UTF-8'))
+		elif(res.path == "/Facture"):
+			facture = self.mysql.facture()
+			string_facture = "["
 
+			for i in range(len(facture)):
+				string_facture += "['" + str(facture[i][0]) + "', " + str(facture[i][1]) + "],"
+			string_facture = string_facture[:len(string_facture)-1]
+			string_facture += "]"
+			html = """<html> <head> <!--Load the AJAX API--> <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script> <script type='text/javascript'>
+
+			      google.charts.load('current', {'packages':['corechart']});
+			      google.charts.setOnLoadCallback(drawChart);
+			      function drawChart() {
+			        var data = new google.visualization.DataTable();
+			        data.addColumn('string', 'Topping');
+			        data.addColumn('number', 'Slices');
+			        data.addRows("""\
+			      	+ string_facture + \
+			        """);
+			        var options = {'title':'Factures',
+			                       'width':400,
+			                       'height':300};
+			        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			        chart.draw(data, options);
+			      }
+			    </script>
+			  </head>
+
+			  <body>
+			    <!--Div that will hold the pie chart-->
+			    <div id='chart_div'></div>
+			  </body>
+			</html>"""
+			f = open("facture.html","w")
+			f.write(html)
+		else:
+			rep = self.mysql.select(res.path)
+			if len(rep) > 0:
+				self.send_response(200)
+				self.send_header("Content-type", "text/html")
+				self.end_headers()
+				self.wfile.write(bytes(str(rep)+'\n', 'UTF-8'))
+			else:
+				self.send_response(404)
+				self.send_header("Content-type", "text/html")
+				self.end_headers()
+		
 
 class MySQL():
 	def __init__(self, name):
@@ -49,6 +93,10 @@ class MySQL():
 	def __exit__(self, exc_type, exc_value, traceback):
 		self.conn.close()
 
+	def facture(self):
+		req = "select Type, Montant from Facture"
+		return self.c.execute(req).fetchall()
+
 	def select(self,path):
 		elem = path.split('/')
 		print("elem",elem)
@@ -57,8 +105,6 @@ class MySQL():
 		else:
 			req = "select %s from %s where id=%s" %(elem[3],elem[1],elem[2])
 		return self.c.execute(req).fetchall()
-		"""variable_bis = "salut"
-		return variable_bis"""
 	
 	def insert(self,path,query):
 		print(query)
