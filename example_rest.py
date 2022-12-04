@@ -1,4 +1,4 @@
-# curl -X GET http://localhost:8888/Etudiant
+# curl -X GET http://localhost:8888/Etudiant/id
 # curl -X POST http://localhost:8888/Etudiant/\?Nom\=Cionaire\&Prenom\=Dick\&idAd\=2
 
 import http.server, urllib.parse, sqlite3
