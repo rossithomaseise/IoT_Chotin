@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+<script src="sql.js"></script>
+<script>
+    function loadBinaryFile(path,success) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", path, true); 
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function() {
+            var data = new Uint8Array(xhr.response);
+            var arr = new Array();
+            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            success(arr.join(""));
+        };
+        xhr.send();
+    };
+
+    loadBinaryFile('./home/rossi/Documents/IoT/IoT_Chotin/logement.sql', function(data){
+        var sqldb = new SQL.Database(data);
+        // Database is ready
+        var res = db.exec("SELECT * FROM Facture");
+    });
+</script>
+
+
+</body>
+</html> 

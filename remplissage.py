@@ -14,7 +14,8 @@ c.execute("SELECT id FROM Mesure")
 rows = c.fetchall()
 last_id_mesure = 0
 for row in rows:
-	last_id_mesure = row[0]
+	last_id_mesurhttps://api.meteomatics.com/2022-12-01T00:00:00Z--2022-12-01T03:00:00Z:PT1H/t_2m:C,relative_humidity_2m:p/50.23,10.23+40.23,20.12/jsonResponse:
+   e = row[0]
 
 tab_id = [[2,last_id_mesure-3],[2,last_id_mesure-2],[1,last_id_mesure-1],[1,last_id_mesure]]
 

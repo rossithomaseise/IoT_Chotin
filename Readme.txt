@@ -1,3 +1,5 @@
+Fichiers : serveur_rest.py avec un module meteo_json.py + le code arduino.
+
 Exercice 1 : remplissage de la base de données.
 
 Il faudra changer les adresses ip.
@@ -26,3 +28,5 @@ Exercice 3 : météo.
 
 curl -X GET 192.168.37.177:8888/Meteo
 
+
+curl -X POST 192.168.37.177:8888/Connexion/\?Identifiant\=toto\&MotDePasse\=202
