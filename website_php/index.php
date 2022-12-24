@@ -1,3 +1,7 @@
+<!-- php -S localhost:8080 -->
+<!-- http://localhost:8080/info.php -->
+<!-- https://mdbootstrap.com/docs/b4/jquery/utilities/embeds/ -->
+<!-- https://startbootstrap.com/previews/freelancer -->
 <!DOCTYPE html>
 
 <html lang="en">

@@ -1,3 +1,6 @@
+-- sqlite3 logement.db
+-- .read logement.sql
+
 -- 2) Destruction des classes
 DROP TABLE IF EXISTS Logement;
 DROP TABLE IF EXISTS Adresse;
@@ -127,12 +130,13 @@ INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
 	(SELECT id FROM Capteur WHERE Ref_Commerciale = "5B8E9FD82A" AND Port_Serveur = 8001) as id_capteur, -- °kg
 	4 as id_mesure;
 
+-- Pour faire une base de donnée de facture cohérente, tout sera fait dans remplissage.sql
 
 -- 8) Création de 4 factures
-INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Internet",2022-11-12,25.7,50);
-INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Electricite",2022-11-13,100.2,25);
-INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Gaz",2022-11-14,20,30);
-INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Eau",2022-11-15,15,40);
+/*INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Internet","01/11/2020",25.7,50);
+INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Electricite","01/11/2020",100.2,25);
+INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Gaz","14/11/2020",20,30);
+INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Eau","15/11/2020",15,40);
 
 -- Association Logement - Facture
 INSERT INTO Logement_Possede_Facture (id_logement, id_facture)
@@ -151,3 +155,4 @@ INSERT INTO Logement_Possede_Facture (id_logement, id_facture)
    SELECT
       (SELECT id FROM Logement WHERE Numero_Telephone = "0605086016" AND IP = "192.168.10.177") as id_logement,
       (SELECT id FROM Facture WHERE Type = "Eau") as id_facture;
+*/
