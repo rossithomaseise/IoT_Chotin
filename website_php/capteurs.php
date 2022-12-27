@@ -66,7 +66,3 @@ while ($row = $res->fetchArray()): ?>
 </body>
 
 </html>
-
-<!--CREATE TABLE Capteur (id INTEGER PRIMARY KEY AUTOINCREMENT, Ref_Commerciale TEXT NOT NULL, Port_Serveur INT NOT NULL, Date_Insertion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-  Id_Type INTEGER NOT NULL, FOREIGN KEY (Id_Type) REFERENCES Type_Capteur(id));
-  -->

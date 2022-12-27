@@ -15,7 +15,23 @@
 
   <?php include('includes/main_style.php'); ?>  
 
-<p>Page Configuration </p>
+  </br>
+
+  <p>Page Configuration </p>
+
+  <?php
+
+    if(isset($_POST['button1'])){
+      echo "seeeeeeeeeeex";
+    }
+    if(isset($_POST['button2'])){
+      echo "naaaaaaaaaaaaaaaan";
+    }
+  ?>
+  <form method="post">
+    <input type="submit" name="button1" value="Ajouter un Capteur Température"/>
+    <input type="submit" name="button2" value="Ajouter un Capteur Poids"/>
+  </form>
 
 </main>
 
