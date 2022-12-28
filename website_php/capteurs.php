@@ -56,6 +56,8 @@ while ($row = $res->fetchArray()): ?>
   <p> <?php echo "$row[0] : Unité = $row[1] et plage = [$row[2],$row[3]]"; ?> </p>
 <?php endwhile; ?>
 
+<h4>Les 10 dernières mesures </h4>
+
 
 </section>
 

@@ -109,6 +109,17 @@ INSERT INTO Mesure (Valeur) VALUES(15); -- 15 °C
 INSERT INTO Mesure (Valeur) VALUES(60); -- 60 kg
 INSERT INTO Mesure (Valeur) VALUES(80); -- 80 kg
 
+INSERT INTO Mesure (Valeur) VALUES(35); -- 35 °C
+INSERT INTO Mesure (Valeur) VALUES(23); -- 23 °C
+INSERT INTO Mesure (Valeur) VALUES(68); -- 68 kg
+INSERT INTO Mesure (Valeur) VALUES(77); -- 77 kg
+
+INSERT INTO Mesure (Valeur) VALUES(41); -- 41 °C
+INSERT INTO Mesure (Valeur) VALUES(28); -- 28 °C
+INSERT INTO Mesure (Valeur) VALUES(95); -- 95 kg
+INSERT INTO Mesure (Valeur) VALUES(89); -- 89 kg
+
+
 -- Association Capteur - Mesure
 
 -- Capteur 1 : 
@@ -129,8 +140,47 @@ INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
 	SELECT
 	(SELECT id FROM Capteur WHERE Ref_Commerciale = "5B8E9FD82A" AND Port_Serveur = 8001) as id_capteur, -- °kg
 	4 as id_mesure;
+-- Capteur 1 : 
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "10A85EF900" AND Port_Serveur = 8000) as id_capteur, -- °C
+	5 as id_mesure;
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "10A85EF900" AND Port_Serveur = 8000) as id_capteur, -- °C
+	6 as id_mesure;
+-- Capteur 2:
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "5B8E9FD82A" AND Port_Serveur = 8001) as id_capteur, -- °kg
+	7 as id_mesure;
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "5B8E9FD82A" AND Port_Serveur = 8001) as id_capteur, -- °kg
+	8 as id_mesure;
+-- Capteur 1 : 
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "10A85EF900" AND Port_Serveur = 8000) as id_capteur, -- °C
+	9 as id_mesure;
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "10A85EF900" AND Port_Serveur = 8000) as id_capteur, -- °C
+	10 as id_mesure;
+-- Capteur 2:
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "5B8E9FD82A" AND Port_Serveur = 8001) as id_capteur, -- °kg
+	11 as id_mesure;
+INSERT INTO Capteur_Possede_Mesure(id_capteur, id_mesure)
+	SELECT
+	(SELECT id FROM Capteur WHERE Ref_Commerciale = "5B8E9FD82A" AND Port_Serveur = 8001) as id_capteur, -- °kg
+	12 as id_mesure;
 
--- Pour faire une base de donnée de facture cohérente, tout sera fait dans remplissage.sql
+
+
+
+-- Pour faire une base de donnée de facture cohérente, tout sera fait dans remplissage.py
 
 -- 8) Création de 4 factures
 /*INSERT INTO Facture (Type , Date_Facture , Montant , Consommation ) VALUES("Internet","01/11/2020",25.7,50);
